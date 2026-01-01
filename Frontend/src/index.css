@@ -1,0 +1,52 @@
+
+  :root {
+    --primary: #0a2e23; 
+    --accent: #c4f135;   
+    --white: #ffffff;
+    --glass: rgba(10, 46, 35, 0.9);
+    --text-slate: #475569;
+    --white: #ffffff;
+    --text-slate: #475569;
+    --primary-dark: #1a2e05;
+    --theme-accent: #f97316;
+    --theme-secondary: #db2777;
+    --theme-light: #65a30d;
+    --theme-bg: #fffbf0;
+    /* --hero-img: url('../assets/Products-Hero-Image1.png'); */
+    --deal-dark: #0a2e23;
+    --deal-neon: #c4f135;
+    --deal-gold: #c4f135;
+    --deal-white: #ffffff;
+    --deal-soft-bg: #fdfdfd;
+    --deal-transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    --slate: #475569;
+    --primary: #0a2e23;  
+    --accent: #c4f135;   
+        --bg-soft: #fcfdfb;
+    --white: #ffffff;
+    --text-main: #1a1a1a;
+    --text-muted: #64748b;
+    --glass: rgba(255, 255, 255, 0.8);
+    --slate: #64748b;     
+    --slate-100: #f1f5f9;
+    --border: rgba(10, 46, 35, 0.1);   
+    --bg-glass: rgba(255, 255, 255, 0.7);
+    --primary: #0a2e23;   
+    --accent: #c4f135;    
+    --white: #ffffff;
+    --glass: rgba(10, 46, 35, 0.9);
+    --slate: #94a3b8;
+    --text-light: rgba(255,255,255,0.85);
+    --track-white: #ffffff;
+    --track-deep: #0a2e23;
+    --track-lime: #c4f135;
+    --track-border: rgba(10, 46, 35, 0.08);
+    --track-shadow: 0 30px 60px -12px rgba(10, 46, 35, 0.12);
+    --track-ease: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+
+* {
+    margin: 0; padding: 0; box-sizing: border-box;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
