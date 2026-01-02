@@ -32,6 +32,7 @@ import AdminDashboard from "./Comp/Routes/AdminDashboard";
 import AdminRoute from "./Comp/Routes/AdminRoute";
 import AdminProtectedRoute from "./Comp/Routes/AdminProtectedRoute";
 import AdminProductPage from "./Comp/Product/adminProductPage";
+import ChatWidget from "./Comp/ChatBot/ChatWidget";
 
 function App() {
   return (
@@ -96,7 +97,7 @@ function App() {
         <Route path="/search-results" element={<SearchResults />} />
         
       </Routes>
-
+      <ChatWidget/>
       <Footer />
     </Router>
   );
