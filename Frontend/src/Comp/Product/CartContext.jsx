@@ -8,14 +8,14 @@ const CartContext = createContext();
 export const useCart = () => useContext(CartContext);
 
 export const CartProvider = ({ children }) => {
-  // 1. FIX: Initialize State from LocalStorage (Cache)
-  // This prevents the cart from flashing empty on refresh
-  const [cartItems, setCartItems] = useState(() => {
-    const savedCart = localStorage.getItem("cartItems");
-    return savedCart ? JSON.parse(savedCart) : [];
-  });
-
+  // ==================================================
+  // 1. MOVED STATE & HELPERS INSIDE THE COMPONENT
+  // ==================================================
+  
   const [popup, setPopup] = useState({ show: false, message: "" });
+
+  // Define helper to check login status
+  const isLoggedIn = () => !!localStorage.getItem("token");
 
   const triggerPopup = (message) => {
     setPopup({ show: true, message });
@@ -28,14 +28,26 @@ export const CartProvider = ({ children }) => {
     setPopup({ show: false, message: "" });
   };
 
-  const isLoggedIn = () => !!localStorage.getItem("token");
+  // ==================================================
+  // 2. CART STATE & LOGIC
+  // ==================================================
 
-  // 2. FIX: Sync State to LocalStorage (Whenever cart changes)
+  // Initialize State from LocalStorage (Cache)
+  const [cartItems, setCartItems] = useState(() => {
+    const savedCart = localStorage.getItem("cartItems");
+    try {
+      return savedCart ? JSON.parse(savedCart) : [];
+    } catch (e) {
+      return [];
+    }
+  });
+
+  // Sync State to LocalStorage (Whenever cart changes)
   useEffect(() => {
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
   }, [cartItems]);
 
-  // 3. Load Cart from API (Source of Truth)
+  // Load Cart from API (Source of Truth)
   useEffect(() => {
     const fetchCart = async () => {
       // If not logged in, clear everything immediately
@@ -48,12 +60,10 @@ export const CartProvider = ({ children }) => {
       try {
         const res = await api.get("/cart/");
         if (res.data.data.items) {
-          // Update State (which auto-updates LocalStorage via Effect #2)
           setCartItems(res.data.data.items);
         }
       } catch (err) {
         console.error("Failed to fetch cart:", err);
-        // If API fails, we still have the LocalStorage cache so the user sees their items!
       }
     };
     fetchCart();

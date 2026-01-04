@@ -4,9 +4,9 @@ const ChatWidget = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [query, setQuery] = useState('');
     // CHANGE 1: Use an array to store the conversation history
-    const [messages, setMessages] = useState([]); 
+    const [messages, setMessages] = useState([]);
     const [loading, setLoading] = useState(false);
-    
+
     // Auto-scroll ref
     const messagesEndRef = useRef(null);
 
@@ -19,23 +19,23 @@ const ChatWidget = () => {
 
     const handleSend = async () => {
         if (!query.trim()) return;
-        
+
         // 1. Add User Message to History immediately
         const userMessage = { role: 'user', text: query };
         setMessages(prev => [...prev, userMessage]);
-        
+
         setLoading(true);
         setQuery(''); // Clear input
 
         try {
-            const res = await fetch('http://localhost:8000/chat', {
+            const res = await fetch('https://daily-pantry-ai-8f5z.onrender.com/chat', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ message: query }),
             });
 
             const data = await res.json();
-            
+
             // 2. Add AI Response to History
             const botMessage = { role: 'bot', text: data.reply };
             setMessages(prev => [...prev, botMessage]);
@@ -71,7 +71,7 @@ const ChatWidget = () => {
 
                     {/* Response Area (Chat History) */}
                     <div style={{ flex: 1, padding: '15px', overflowY: 'auto', background: '#f9f9f9', fontSize: '14px' }}>
-                        
+
                         {messages.length === 0 && (
                             <p style={{ color: '#888', fontStyle: 'italic', textAlign: 'center', marginTop: '50%' }}>
                                 Ask me about our fresh products...
@@ -80,8 +80,8 @@ const ChatWidget = () => {
 
                         {/* CHANGE 2: Map through messages array */}
                         {messages.map((msg, index) => (
-                            <div 
-                                key={index} 
+                            <div
+                                key={index}
                                 style={{
                                     display: 'flex',
                                     justifyContent: msg.role === 'user' ? 'flex-end' : 'flex-start',
@@ -101,13 +101,13 @@ const ChatWidget = () => {
                                 </div>
                             </div>
                         ))}
-                        
+
                         {loading && (
                             <div style={{ textAlign: 'left', color: '#888', fontStyle: 'italic', marginLeft: '10px' }}>
                                 Typing...
                             </div>
                         )}
-                        
+
                         {/* Invisible div to auto-scroll to */}
                         <div ref={messagesEndRef} />
                     </div>

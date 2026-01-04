@@ -12,13 +12,13 @@ const Header = () => {
   // const role = localStorage.getItem("role");
 
 const { cartItems } = useCart();
-
+const validCartItems = cartItems.filter(item => typeof item.price === 'number' && typeof item.qty === 'number');
   const handleSearch = async (e) => {
     e.preventDefault();
     const trimmedQuery = searchQuery.trim().toLowerCase();
-    if (!trimmedQuery) return
+    if (!trimmedQuery) return;
 
-    const staticPages = []
+    const staticPages = [
       { name: "Home", path: "/" },
       { name: "Login", path: "/Login" },
       { name: "Signup", path: "/Signup" },
@@ -157,7 +157,7 @@ const { cartItems } = useCart();
             <i className="fa-solid fa-cart-shopping"></i>
 
             {/* Cart Quantity Badge */}
-            <span className="cart-badge">{cartItems.length}</span>
+            <span className="cart-badge">{validCartItems.length}</span>
           </Link>
 
 
