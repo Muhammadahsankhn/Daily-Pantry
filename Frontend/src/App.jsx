@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import Footer from "./Comp/FooterComp/Footer";
-import Header from "./Comp/Headercomp/Header";
+import Header from "./Comp/HeaderComp/Header";
 import Hero from "./Comp/hero/Hero";
 import Newsletter from "./Comp/NewsletterComp/Newsletter";
 import Cart from "./Comp/Product/Cart";
@@ -10,7 +10,7 @@ import CategorySection from "./Comp/Product/CategorySection";
 import Deal from "./Comp/Product/Deal";
 import DiscountSection from "./Comp/Product/Discount";
 import FeaturedProduct from "./Comp/Product/FeaturedProduct";
-import Login from "./Comp/Security/Login";
+import Login from "./Comp/Security/login";
 import MyAccount from "./Comp/Security/My-account";
 import Signup from "./Comp/Security/Signup";
 import Testimonials from "./Comp/TestimonialsComp/Testimonials";
