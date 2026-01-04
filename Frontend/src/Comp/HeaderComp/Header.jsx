@@ -16,9 +16,9 @@ const { cartItems } = useCart();
   const handleSearch = async (e) => {
     e.preventDefault();
     const trimmedQuery = searchQuery.trim().toLowerCase();
-    if (!trimmedQuery) return;
+    if (!trimmedQuery) return
 
-    const staticPages = [
+    const staticPages = []
       { name: "Home", path: "/" },
       { name: "Login", path: "/Login" },
       { name: "Signup", path: "/Signup" },
