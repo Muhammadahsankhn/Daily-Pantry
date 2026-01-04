@@ -8,13 +8,17 @@
 // export default api;
 import axios from "axios";
 
-// Get token from localStorage (set this on login)
-const token = localStorage.getItem("token");
-
 const api = axios.create({
-  baseURL: "https://daily-pantry.onrender.com/api/v1",
-  headers: token ? { Authorization: `Bearer ${token}` } : {},
-  withCredentials: true,
+  // CHANGE THIS LINE:
+  baseURL: "https://daily-pantry.onrender.com/api/v1", 
+});
+
+api.interceptors.request.use((config) => {
+  const token = localStorage.getItem("token");
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
 });
 
 export default api;
