@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../../App.css";
-import api from "../api/Api.js"; 
-import Popup from "../HeaderComp/Popup.jsx"; 
+import api from "../api/Api.js";
+import Popup from "../HeaderComp/Popup.jsx";
+import { useCart } from "../Product/CartContext.jsx";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -10,7 +11,8 @@ const Header = () => {
   const [showPopup, setShowPopup] = useState(false);
   // const role = localStorage.getItem("role");
 
-  
+const { cartItems } = useCart();
+
   const handleSearch = async (e) => {
     e.preventDefault();
     const trimmedQuery = searchQuery.trim().toLowerCase();
@@ -35,7 +37,7 @@ const Header = () => {
       { name: "Bakery Items", path: "/Bakery-Page" },
     ];
 
-    
+
     const matchedPage = staticPages.find(
       (page) =>
         page.name.toLowerCase() === trimmedQuery ||
@@ -48,13 +50,13 @@ const Header = () => {
       return;
     }
 
-   
+
     try {
       const res = await api.get(`/search?q=${encodeURIComponent(trimmedQuery)}`);
       if (res.data.success && res.data.data.length > 0) {
         navigate(`/search-results?q=${encodeURIComponent(trimmedQuery)}`);
       } else {
-   
+
         setShowPopup(true);
       }
     } catch (err) {
@@ -129,11 +131,11 @@ const Header = () => {
             </div>
           </div>
 
-          
+
           <Link to="/Deal">Deals</Link>
           <Link to="/FAQs">FAQs</Link>
-          
-      
+
+
         </nav>
 
         {/* ===================== SEARCH BOX ===================== */}
@@ -153,7 +155,11 @@ const Header = () => {
         <div className="header-actions">
           <Link to="/Cart" className="icon-btn cart-icon">
             <i className="fa-solid fa-cart-shopping"></i>
+
+            {/* Cart Quantity Badge */}
+            <span className="cart-badge">{cartItems.length}</span>
           </Link>
+
 
           <div className="user-menu">
             <div className="icon-btn">
